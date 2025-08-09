@@ -7,7 +7,7 @@
      * @param mixed $mod
      * @return int[]|string
      */
-    function greg_to_jalali($gy, $gm, $gd, $mod = '')
+    function greg_to_jalali($gy, $gm, $gd, $mod = ''): array|string
     {
         $g_d_m = array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334);
         if ($gy > 1600) {
@@ -43,7 +43,7 @@
      * @param mixed $mod
      * @return array<int|mixed>|string
      */
-    function jalali_to_greg($jy, $jm, $jd, $mod = '')
+    function jalali_to_greg($jy, $jm, $jd, $mod = ''): array|string
     {
         if ($jy > 979) {
             $gy = 1600;
@@ -86,7 +86,7 @@
      * @param mixed $jd
      * @return bool
      */
-    function is_valid_jalali_date($jy, $jm, $jd)
+    function is_valid_jalali_date($jy, $jm, $jd): bool
     {
         $g_date = jalali_to_greg($jy, $jm, $jd);
         $j_date = greg_to_jalali($g_date[0], $g_date[1], $g_date[2]);
@@ -100,7 +100,7 @@
      * @param mixed $jm
      * @return int|bool
      */
-    function get_last_day_of_jalali_month($jy, $jm)
+    function get_last_day_of_jalali_month($jy, $jm): bool|int
     {
         if ($jm >= 1 && $jm <= 6)
             return 31;
@@ -116,9 +116,9 @@
     /**
      * Summary of get_jalali_month_text
      * @param mixed $jm
-     * @return string
+     * @return bool|string
      */
-    function get_jalali_month_text($jm)
+    function get_jalali_month_text($jm): bool|string
     {
         $jmText = '';
         switch ($jm) {
@@ -159,7 +159,7 @@
                 $jmText = 'حوت';
                 break;
             default:
-                $jmText = '';
+                $jmText = false; // invalid month
                 break;
         }
         return $jmText;
